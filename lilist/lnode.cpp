@@ -12,20 +12,69 @@ bool initlist(linklist &l){
 	l -> data = 1;
 	return true;
 }
+//判断表空
+bool empty(linklist l)
+{
+	if(l -> next == NULL) return true;
+   	return false;	
+}
+//求表长
+int length(linklist l){
+	int leng = 0;
+	lnode *q;
+	q = l -> next;
+	while(q!=NULL){
+		q = q -> next;
+		leng ++;
+	}		
+	return leng;
+}
+//获取第i位的指针
+//使用前确保i在合理的范围之内
+lnode *getlnodei(linklist l,int i)
+{
+	lnode *s = l;
+	int j = 0;
+	while(s != NULL){
+			if(i == j){return s;}
+			s = s -> next;
+			j++;
+
+	}
+	return NULL;
+}
 //头插法建立链表
-linklist listheadinsert(linklist l){
-	lnode *s;int x;
-	s = new lnode;
+bool listheadinsert(linklist &l){
+	if(!empty(l)){return false;}
+	lnode *s;
+	int x;
 	cin>>x;
 	while(x != -1){
+		s = new lnode;
 		s -> data = x;
 		s -> next = l -> next;
 		l -> next = s;
-		s = new lnode;
 		cin>>x;	
 	}
-	delete s;
-	return l;
+	return true;
+}
+//尾插法建立链表
+bool listtailinsert(linklist &l){
+	
+	if(!empty(l)){return false;}
+	lnode *s;
+	lnode *q = l;
+	int x;
+	cin>>x;
+	while(x != -1){
+		s = new lnode;
+		q -> next = s;
+		s -> data = x;
+		q = s;
+		cin>>x;
+	}//修改
+	q -> next = NULL;
+	return true;
 }
 //输出链表的各项值
 void printlist(linklist l){
@@ -37,66 +86,78 @@ void printlist(linklist l){
 	}
 }
 //按值查找
-lnode *locateelem(linklist &l,int e){
-	lnode *p = l -> next;
-	while(p != NULL && p -> data != e)
-		p = p -> next; 
-	return p;
+int locateelem(linklist &l,int e)
+{
+	if (empty(l)){
+		return 0;
+	}
+	lnode *s = l -> next;
+	int lo = 0;
+	while(s != NULL)
+	{
+		lo ++;
+		if(s -> data == e){
+			return lo;
+		}
+		s = s-> next;
+	}
+	return 0;
+}
+//按位查找
+int getelem(linklist l,int i)
+{	
+	if (length(l) < i || i < 1 || empty(l)){
+	 	return -1;
+	}
+	lnode *s = getlnodei(l,i);
+	return s -> data;
 }
 //插入到第i个位置
-linklist insert(linklist &l,int i,int num){
-	lnode *p = l -> next;
-	if (i<=1){
-		lnode *k = new lnode;
-		k ->next = l -> next;
-		l -> next = k;
-}
-	int j = 1;
-	while(j < i-1 && p != NULL){
-		p = p -> next;
-		j++;
-}
-	
-	lnode *k = new lnode;
-	k ->next = p -> next;
-	p -> next = k;
-	k -> data = num;
-	return l;
+bool insert(linklist &l,int i,int num){
+	if(i < 1 || i > length(l)+1)
+	{return false;}
+	lnode *s;
+	lnode *p = new lnode;
+	s = getlnodei(l,i-1);
+	p -> next = s -> next;
+	s -> next = p;
+	p -> data = num;
+	return true;
 }
 //删除节点
-linklist pop(linklist &l,int i){
-	lnode *p = l -> next;
+bool pop(linklist &l,int i, int &e){
+	if (i<1 || i> length(l)){
+	return false;
+	}
+	lnode *s = getlnodei(l,i);
+	lnode *p = getlnodei(l,i-1);
+	e = s -> data;
+	p -> next = s ->next;
+	delete s;
+	return true;
+}
+//销毁链表
+int destroylist(linklist &l)
+{
+	if(empty(l)){delete l;return 1;}
 	lnode *q;
-	if (i<=1){
-		l -> next = p -> next;
-		delete p;
-}
-	int j = 1;
-	while(j < i-1 && p != NULL){
-		p = p -> next;
-		j++;
-}
-	q = p -> next;
-	p -> next = q -> next;
+	q = l->next;
+	while(q -> next != NULL){
+		l -> next = q -> next;
+		delete q;
+		q = l -> next;
+	}
 	delete q;
-	return l;
+	delete l;
+	return 2;
+
 }
 int main(){
-	lnode *p;
 	linklist l;
 	initlist(l);
-	cout<<l -> data<<endl;
-	listheadinsert(l);	
-	p = locateelem(l,10);
-	cout<< "p:data:"<<endl;
-	cout<<p -> data << endl;
+	listtailinsert(l);
 	printlist(l);
-	insert(l,3,67);
-	cout<<"new"<<endl;
-	printlist(l);
-	cout<<"new"<<endl;
-	pop(l,3);
-	printlist(l);
+	cout<<destroylist(l)<<endl;
 	return 0;
 
 }
