@@ -24,8 +24,7 @@ bool push(sqstack &s,int x){
 		{
 		s.data[++s.top] = x;
 		return true;
-	}
-	
+	}	
 }
 //出栈
 bool pop(sqstack &s,int &x){
@@ -54,6 +53,5 @@ int main(){
 	pop(s,x);
 	cout<<x<<endl;
 	cout<<s.data[s.top]<<endl;
-
 	return 0;
 }
