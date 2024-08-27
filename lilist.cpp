@@ -1,5 +1,5 @@
 #include<iostream>
-#include"linklist.h"
+#include"lilist.h"
 using namespace std;
 //初始化
 Llist::Llist(){

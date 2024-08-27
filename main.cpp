@@ -1,5 +1,5 @@
 #include<iostream>
-#include"linklist.h"
+#include"lilist.h"
 int main(){
 
 	using namespace std;
