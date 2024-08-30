@@ -2,21 +2,17 @@
 #include"lilist.h"
 using namespace std;
 //初始化
-Llist::Llist(){
-	l = new lnode;
-	if (l == NULL)cout<<"Initialization failure";
-	l -> next = NULL;
-	l -> data = 1;
+Llist::Llist():l(new lnode{1,nullptr}){
 	cout<<"Init a empty list"<<endl;
 }
 //判断表空
-bool Llist::empty()
+bool Llist::empty()const
 {
 	if(l -> next == NULL) return true;
    	return false;	
 }
 //求表长
-int Llist::length(){
+int Llist::length()const{
 	int leng = 0;
 	lnode *q;
 	q = l -> next;
@@ -28,7 +24,7 @@ int Llist::length(){
 }
 //获取第i位的指针
 //使用前确保i在合理的范围之内
-lnode* Llist::getlnodei(int i)
+lnode* Llist::getlnodei(int i)const
 {
 	lnode *s = l;
 	int j = 0;
@@ -74,7 +70,7 @@ bool Llist::listtailinsert(){
 	return true;
 }
 //输出链表的各项值
-void Llist::printlist(){
+void Llist::printlist()const{
 	lnode *s;
 	s = l->next;
 	while(s != NULL){
@@ -83,7 +79,7 @@ void Llist::printlist(){
 	}
 }
 //按值查找
-int Llist::locateelem(int e)
+int Llist::locateelem(int e)const
 {
 	if (empty()){
 		return 0;
@@ -101,7 +97,7 @@ int Llist::locateelem(int e)
 	return 0;
 }
 //按位查找
-int Llist::getelem(int i)
+int Llist::getelem(int i)const
 {	
 	if (length() < i || i < 1 || empty()){
 	 	return -1;
@@ -138,14 +134,37 @@ Llist::~Llist()
 {
 	if(empty()){delete l;cout<<"empty,~"<<endl;}
 	lnode *q;
-	q = l->next;
-	while(q -> next != NULL){
-		l -> next = q -> next;
+	while(l != NULL){
+		q = l;
+		l = l->next;
 		delete q;
-		q = l -> next;
 	}
-	delete q;
-	delete l;
 	cout<<"destroy~"<<endl;
 
 }
+bool Lstack::stackempty()const{
+	return empty();
+}
+bool Lstack::push(int x){
+	return insert(1,x);
+}
+bool Lstack::pop(int &x){
+	return Llist::pop(1,x);
+}
+bool Lstack::gettop(int &x)const{
+	int e;
+	e = getelem(1);
+	if(e = -1)return false;
+	else{
+		x = e;
+		return true;
+	}
+}	
+
+
+
+
+
+
+
+
