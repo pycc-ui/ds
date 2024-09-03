@@ -42,7 +42,3 @@ bool gethead(sqqueue &q,int &x){
 	x = q.data[q.front];
 	return true;
 }
-int main(){
-	
-	return 0;
-}

@@ -42,16 +42,3 @@ bool gettop(sqstack &s,int &x){
 }
 //销毁栈
 //链栈,与单链表差不多
-int main(){
-	sqstack s;
-	initstack(s);
-	push(s,10);
-	cout<<s.data[s.top]<<endl;
-	push(s,20);
-	cout<<s.data[s.top]<<endl;
-	int x;
-	pop(s,x);
-	cout<<x<<endl;
-	cout<<s.data[s.top]<<endl;
-	return 0;
-}

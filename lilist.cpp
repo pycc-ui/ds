@@ -102,8 +102,7 @@ int Llist::getelem(int i)const
 	if (length() < i || i < 1 || empty()){
 	 	return -1;
 	}
-	lnode *s = getlnodei(i);
-	return s -> data;
+	return getlnodei(i) -> data;
 }
 //插入到第i个位置
 bool Llist::insert(int i,int num){
@@ -153,14 +152,37 @@ bool Lstack::pop(int &x){
 }
 bool Lstack::gettop(int &x)const{
 	int e;
-	e = getelem(1);
-	if(e = -1)return false;
+	e = this-> getelem(1);
+	cout<<"e:"<<e<<endl;
+	if(e == -1)return false;
 	else{
 		x = e;
 		return true;
 	}
 }	
-
+Lqueue::Lqueue():Llist(),tail(0){}
+bool Lqueue::queueempty()const
+{return empty();}
+bool Lqueue::enqueue(int x)
+{	
+	return insert(++tail,x);
+}
+bool Lqueue::dequeue(int &x)
+{	if (tail == 0)return false;
+	tail--;	
+	return pop(1,x);} 
+bool Lqueue::gethead(int &x)const
+{	int e;
+	e = getelem(1);
+	if(e == -1)return false;
+	else{
+		x = e;
+		return true;
+	}
+}
+int Llist::operator[](int i){
+	return getelem(i+1);
+}
 
 
 

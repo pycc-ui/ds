@@ -22,6 +22,7 @@ class Llist
 		int getelem(int i)const;
 		bool insert(int i,int num);
 		virtual bool pop(int i,int &e);
+		int operator[](int i);
 };
 class Lstack : public Llist
 {
@@ -31,5 +32,15 @@ class Lstack : public Llist
 		bool pop(int &x);
 		bool gettop(int &x)const;
 };
-
+class Lqueue : public Llist
+{
+	private:
+		int tail;
+	public:
+		Lqueue();
+		bool queueempty()const;
+		bool enqueue(int x);
+		bool dequeue(int &x);
+		bool gethead(int &x)const;
+};
 #endif

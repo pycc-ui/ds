@@ -1,19 +1,18 @@
 #include<iostream>
 #include"lilist.h"
+using namespace std;
 int main(){
-
-	using namespace std;
-	Llist er;
-	er.listtailinsert();
-	er.printlist();
-	cout<<"length is:"<<er.length()<<endl;
-	cout<<"2 locate :"<<er.locateelem(2)<<endl;
-	cout<<"The 3 is:"<<er.getelem(3)<<endl;
-	er.insert(3,99);
-	er.printlist();
-	int e;
-	er.pop(3,e);
-	cout<<"pop is:"<<e<<endl;
-	er.printlist();
- 	return 0;
+	Lqueue a;
+	a.enqueue(10);
+	a.enqueue(90);
+	a.printlist();
+	cout<<"index"<<endl;
+	cout<<a[1]<<endl;
+	int b;
+	a.gethead(b);
+	cout<<"head:"<<b<<endl;
+	a.dequeue(b);
+	a.printlist();
+	cout<<"pop:"<<b<<endl;
+	return 0;
 }
