@@ -8,15 +8,14 @@ Llist::Llist():l(new lnode{1,nullptr}){
 //判断表空
 bool Llist::empty()const
 {
-	if(l -> next == NULL) return true;
-   	return false;	
+   	return l->data == nullptr;	
 }
 //求表长
 int Llist::length()const{
 	int leng = 0;
 	lnode *q;
 	q = l -> next;
-	while(q!=NULL){
+	while(q!=nullptr){
 		q = q -> next;
 		leng ++;
 	}		
@@ -28,13 +27,13 @@ lnode* Llist::getlnodei(int i)const
 {
 	lnode *s = l;
 	int j = 0;
-	while(s != NULL){
+	while(s != nullptr){
 			if(i == j){return s;}
 			s = s -> next;
 			j++;
 
 	}
-	return NULL;
+	return nullptr;
 }
 //头插法建立链表
 bool Llist::listheadinsert(){
@@ -58,22 +57,21 @@ bool Llist::listtailinsert(){
 	lnode *s;
 	lnode *q = l;
 	int x;
-	cin>>x;
-	while(x != -1){
+	while(cin>>x){
+		if(x == -1) break;
 		s = new lnode;
 		q -> next = s;
 		s -> data = x;
 		q = s;
-		cin>>x;
 	}//修改
-	q -> next = NULL;
+	q -> next = nullptr;
 	return true;
 }
 //输出链表的各项值
 void Llist::printlist()const{
 	lnode *s;
 	s = l->next;
-	while(s != NULL){
+	while(s != nullptr){
 		cout<<s->data<<endl;
 		s = s->next;
 	}
@@ -86,7 +84,7 @@ int Llist::locateelem(int e)const
 	}
 	lnode *s = l -> next;
 	int lo = 0;
-	while(s != NULL)
+	while(s != nullptr)
 	{
 		lo ++;
 		if(s -> data == e){
@@ -133,7 +131,7 @@ Llist::~Llist()
 {
 	if(empty()){delete l;cout<<"empty,~"<<endl;}
 	lnode *q;
-	while(l != NULL){
+	while(l != nullptr){
 		q = l;
 		l = l->next;
 		delete q;
