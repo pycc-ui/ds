@@ -1,18 +1,10 @@
 #include<iostream>
-#include"lilist.h"
+#include"tree.h"
+#include<string>
 using namespace std;
 int main(){
-	Llist a;
+	string a;
 	cin>>a;
-	Llist b;
-	b = a;
-	b.printlist();
-	int x;
-	b.pop(1,x);
-	b.printlist();
-	cout<<"a"<<endl;
-	cout<<a;
-	Llist c = a +b;
-	cout<<c;
+	cout<<"你好,"<<a<<endl;
 	return 0;
 }

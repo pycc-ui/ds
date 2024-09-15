@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
 #define maxsize 10
+//这里是循环队列
 typedef struct{
 	int data[maxsize];
 	int front,rear;
@@ -32,7 +33,7 @@ bool dequeue(sqqueue &q,int &x)
 	if(queueempty(q))
 		return false;
 	x = q.data[q.front];
-	q.front = (q.rear + 1)%maxsize;
+	q.front = (q.front + 1)%maxsize;
 	return true;
 }
 //读取对头操作
